@@ -8,6 +8,7 @@ import { tap } from "rxjs/operators";
 import { noop } from "rxjs";
 import { Router } from "@angular/router";
 import { AppState } from "../../reducers";
+import { login } from "../auth.actions";
 
 @Component({
   selector: "login",
@@ -39,6 +40,16 @@ export class LoginComponent implements OnInit {
       .pipe(
         tap((user) => {
           console.log(user);
+
+          // crude way of dispatching an action.
+          // this.store.dispatch({
+          //   type: "Login Action",
+          //   payload: { userProfile: user },
+          // });
+
+          // creating an action the refined way, by usign the action creator.
+          // this.store.dispatch(login({ user: user }));
+          this.store.dispatch(login({ user })); // ts feature when key and data have same name.
 
           this.router.navigateByUrl("/courses");
         })

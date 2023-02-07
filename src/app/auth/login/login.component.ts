@@ -41,7 +41,13 @@ export class LoginComponent implements OnInit {
         tap((user) => {
           console.log(user);
 
-          this.store.dispatch(login({ user }));
+          const newLoginAction = login({ user });
+
+          console.log("New Login action: ", newLoginAction);
+
+          debugger;
+
+          this.store.dispatch(newLoginAction);
 
           this.router.navigateByUrl("/courses");
         })

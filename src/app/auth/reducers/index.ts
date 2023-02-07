@@ -18,11 +18,11 @@ export interface AuthState {
 
 export const initialAuthState: AuthState = { user: undefined };
 
-// function authReducer(state, action): AuthState { } // crude way
-
 export const authReducer = createReducer(
   initialAuthState,
   on(AuthActions.login, (state, action) => {
+    console.log("Calling Login Reducer");
+    debugger;
     return { user: action.user };
   })
 );

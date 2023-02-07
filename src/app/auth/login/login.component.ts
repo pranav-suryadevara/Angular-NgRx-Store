@@ -41,15 +41,7 @@ export class LoginComponent implements OnInit {
         tap((user) => {
           console.log(user);
 
-          // crude way of dispatching an action.
-          // this.store.dispatch({
-          //   type: "Login Action",
-          //   payload: { userProfile: user },
-          // });
-
-          // creating an action the refined way, by usign the action creator.
-          // this.store.dispatch(login({ user: user }));
-          this.store.dispatch(login({ user })); // ts feature when key and data have same name.
+          this.store.dispatch(login({ user }));
 
           this.router.navigateByUrl("/courses");
         })

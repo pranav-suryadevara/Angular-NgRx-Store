@@ -55,6 +55,7 @@ const routes: Routes = [
       metaReducers,
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    EffectsModule.forRoot([]),
   ],
   bootstrap: [AppComponent],
 })

@@ -1,15 +1,21 @@
+import { filter } from "@angular-devkit/schematics";
 import { Injectable } from "@angular/core";
-import { Actions } from "@ngrx/effects";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { tap } from "rxjs/operators";
+import { AuthActions } from "./action-types";
 
 @Injectable()
 export class AuthEffects {
-  constructor(private actions$: Actions) {
-    actions$.subscribe((action) => {
-      // no error handling here
-      if (action.type === "[Login Page] User Login") {
-        // Repeating here the action type
-        localStorage.setItem("user", JSON.stringify(action["user"])); // there is not type safety here
-      }
-    });
-  }
+  login$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.login),
+        tap((action) =>
+          localStorage.setItem("user", JSON.stringify(action.user))
+        )
+      ),
+    { dispatch: false }
+  );
+
+  constructor(private actions$: Actions) {}
 }

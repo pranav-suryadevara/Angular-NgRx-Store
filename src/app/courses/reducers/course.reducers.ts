@@ -1,3 +1,4 @@
+import { state } from "@angular/animations";
 import { createEntityAdapter, EntityState } from "@ngrx/entity";
 import { createReducer, on } from "@ngrx/store";
 import { CourseActions } from "../action-types";
@@ -19,6 +20,10 @@ export const coursesReducer = createReducer(
   initialCoursesState,
   on(CourseActions.allCoursesLoaded, (state, action) =>
     adapter.setAll(action.courses, { ...state, allCoursesLoaded: true })
+  ),
+
+  on(CourseActions.courseUpdated, (state, action) =>
+    adapter.updateOne(action.update, state)
   )
 );
 

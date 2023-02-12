@@ -30,15 +30,18 @@ import { compareCourses, Course } from "./model/course";
 
 import { compareLessons, Lesson } from "./model/lesson";
 import { CourseEntityService } from "./services/course-entity.service";
+import { CoursesResolver } from "./courses.resovler";
 
 export const coursesRoutes: Routes = [
   {
     path: "",
     component: HomeComponent,
+    resolve: { courses: CoursesResolver },
   },
   {
     path: ":courseUrl",
     component: CourseComponent,
+    resolve: { courses: CoursesResolver },
   },
 ];
 
@@ -79,7 +82,7 @@ const entityMetadata: EntityMetadataMap = {
     CourseComponent,
   ],
   entryComponents: [EditCourseDialogComponent],
-  providers: [CoursesHttpService, CourseEntityService],
+  providers: [CoursesHttpService, CourseEntityService, CoursesResolver],
 })
 export class CoursesModule {
   constructor(private eds: EntityDefinitionService) {
